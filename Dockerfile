@@ -28,6 +28,8 @@ RUN mkdir -p /temp && cd /temp \
     && make && make install \
     && cd / && rm -rf /temp
 
+ADD ./ocserv /etc/ocserv
+
 # generate [ca-key.pem] -> ca-cert.pem [ca-key]
 RUN certtool --generate-privkey --outfile /opt/certs/ca-key.pem && certtool --generate-self-signed --load-privkey /opt/certs/ca-key.pem --template /opt/certs/ca-tmp --outfile /opt/certs/ca-cert.pem
 # generate [server-key.pem] -> server-cert.pem [ca-key, server-key] 
